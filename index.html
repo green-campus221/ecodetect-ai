@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouna Beauty — Salon d'esthétique à Cap Skirring</title>
+<meta name="description" content="Mouna Beauty, salon d'esthétique à Cap Skirring : massages, soins du visage et du corps, manucure, pédicure, pose d'ongles et épilation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ECE1D2;
+    --bg-soft: #E4D6C3;
+    --shadow-light: #FFFBF3;
+    --shadow-dark: #B9A587;
+    --shadow-dark-2: #a8926f;
+    --text: #453424;
+    --text-soft: #7a6650;
+    --accent: #B85C3E;
+    --accent-deep: #8A3F28;
+    --sage: #78855A;
+    --sage-deep: #566140;
+    --rose: #C98B7A;
+    --card-radius: 28px;
+    --pill-radius: 100px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--accent-deep);
+    letter-spacing:-0.01em;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  /* ---------- Claymorphism primitives ---------- */
+  .clay{
+    background: var(--bg);
+    border-radius: var(--card-radius);
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+  }
+  .clay-inset{
+    background: var(--bg);
+    border-radius: var(--card-radius);
+    box-shadow:
+      inset 6px 6px 12px var(--shadow-dark),
+      inset -6px -6px 12px var(--shadow-light);
+  }
+  .clay-pill{
+    border-radius: var(--pill-radius);
+    box-shadow:
+      6px 6px 12px var(--shadow-dark),
+      -6px -6px 12px var(--shadow-light);
+  }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position: sticky; top:0; z-index:50;
+    padding: 18px 0;
+    background: linear-gradient(var(--bg) 78%, transparent);
+  }
+  .navbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 10px 14px 10px 22px;
+    border-radius: var(--pill-radius);
+    background: var(--bg);
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+  }
+  .brand{ font-family:'Fraunces', serif; font-weight:700; font-size:1.25rem; color:var(--accent-deep); }
+  .brand span{ color:var(--sage); }
+  nav ul{ display:flex; gap:6px; }
+  nav a{
+    font-weight:600; font-size:0.9rem; color:var(--text-soft);
+    padding: 10px 16px; border-radius: var(--pill-radius);
+    transition: box-shadow .25s ease, color .25s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    color:var(--accent-deep);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    outline: none;
+  }
+  .nav-cta{
+    display:flex; align-items:center; gap:6px;
+    background: var(--sage); color:#fff !important;
+    padding:10px 20px; border-radius: var(--pill-radius);
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    font-weight:700; font-size:0.88rem;
+  }
+  .menu-toggle{ display:none; }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; padding: 90px 0 70px; overflow:hidden; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--sage-deep);
+    background:var(--bg); padding:8px 16px; border-radius:var(--pill-radius);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.05;
+    margin-bottom:20px;
+  }
+  .hero p.lead{
+    color:var(--text-soft); font-size:1.08rem; max-width:46ch; margin-bottom:32px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 15px 26px; border-radius: var(--pill-radius);
+    font-weight:700; font-size:0.95rem; cursor:pointer; border:none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:active{ transform: scale(0.97); }
+  .btn-primary{
+    background: var(--accent); color:#fff;
+    box-shadow: 6px 6px 14px var(--shadow-dark-2), -4px -4px 10px var(--shadow-light);
+  }
+  .btn-primary:hover{ box-shadow: 8px 8px 18px var(--shadow-dark-2), -6px -6px 14px var(--shadow-light); }
+  .btn-ghost{
+    background: var(--bg); color:var(--text);
+    box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  }
+  .btn-ghost:hover{ box-shadow: inset 3px 3px 8px var(--shadow-dark), inset -3px -3px 8px var(--shadow-light); }
+
+  .hero-visual{ position:relative; height: 380px; display:flex; align-items:center; justify-content:center; }
+  .blob{
+    position:absolute; width: 320px; height:320px; border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+    background: var(--bg);
+    box-shadow: 18px 18px 36px var(--shadow-dark), -18px -18px 36px var(--shadow-light);
+    animation: morph 12s ease-in-out infinite;
+  }
+  @keyframes morph{
+    0%,100%{ border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
+    50%{ border-radius: 60% 40% 35% 65% / 55% 65% 35% 45%; }
+  }
+  .leaf-icon{ position:relative; z-index:2; width:150px; height:150px; }
+
+  .float-chip{
+    position:absolute; padding:12px 18px; border-radius: var(--pill-radius);
+    background: var(--bg); font-weight:700; font-size:0.82rem; color:var(--accent-deep);
+    box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  }
+  .chip-1{ top: 8%; right: 4%; }
+  .chip-2{ bottom: 10%; left: 0%; color:var(--sage-deep); }
+
+  @media (prefers-reduced-motion: reduce){
+    .blob{ animation:none; }
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 70px 0; }
+  .section-head{ max-width: 640px; margin: 0 auto 44px; text-align:center; }
+  .section-head h2{ font-size: clamp(1.8rem, 3.4vw, 2.5rem); margin-bottom:12px; }
+  .section-head p{ color:var(--text-soft); }
+  .divider{
+    width:56px; height:56px; margin: 0 auto 18px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  }
+
+  /* ---------- Prestations ---------- */
+  .services-grid{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+  .service-card{
+    padding: 28px 24px; display:flex; flex-direction:column; gap:14px;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .service-card:hover{ transform: translateY(-4px); }
+  .service-icon{
+    width:52px; height:52px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg); box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+    font-size:1.4rem;
+  }
+  .service-card h3{ font-size:1.05rem; }
+  .service-card p{ color:var(--text-soft); font-size:0.9rem; }
+
+  /* ---------- Tarifs ---------- */
+  .price-nav{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:44px;
+  }
+  .price-nav a{
+    padding:9px 18px; font-size:0.85rem; font-weight:700; color:var(--text-soft);
+  }
+  .price-nav a:hover{ color:var(--accent-deep); }
+
+  .price-block{ margin-bottom: 54px; scroll-margin-top: 110px; }
+  .price-block-head{
+    display:flex; align-items:center; gap:14px; margin-bottom:22px;
+  }
+  .price-block-head .num{
+    width:38px; height:38px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; color:var(--accent);
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  }
+  .price-block-head h3{ font-size:1.3rem; }
+  .price-list{ padding: 8px; display:grid; gap:2px; }
+  .price-row{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    padding: 16px 20px; border-radius:18px;
+    transition: box-shadow .2s ease;
+  }
+  .price-row:hover{ box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
+  .price-row .label{ font-weight:600; }
+  .price-row .sub{ display:block; color:var(--text-soft); font-size:0.82rem; font-weight:400; margin-top:2px; }
+  .price-row .amount{
+    font-family:'Fraunces', serif; font-weight:700; color:var(--accent-deep);
+    white-space:nowrap; font-size:1.05rem;
+  }
+  .price-row .dots{ flex:1; border-bottom: 2px dotted var(--shadow-dark); margin-bottom:6px; }
+
+  .note-card{
+    margin-top: 10px; padding: 20px 24px; display:flex; gap:14px; align-items:center;
+    color:var(--text-soft); font-size:0.92rem;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:stretch;
+  }
+  .contact-card{ padding:36px; }
+  .contact-card h3{ font-size:1.4rem; margin-bottom:18px; }
+  .info-row{ display:flex; gap:14px; align-items:flex-start; margin-bottom:18px; }
+  .info-row .ic{
+    width:40px; height:40px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg); box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  }
+  .info-row .txt strong{ display:block; margin-bottom:2px; }
+  .info-row .txt span{ color:var(--text-soft); font-size:0.92rem; }
+  .map-frame{ padding:10px; height:100%; min-height:320px; }
+  .map-frame iframe{ width:100%; height:100%; min-height:300px; border:0; border-radius:20px; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 40px 0 30px; text-align:center; }
+  footer p{ color:var(--text-soft); font-size:0.85rem; }
+  footer .brand{ margin-bottom:10px; justify-content:center; display:flex; }
+
+  /* ---------- WhatsApp floating button ---------- */
+  .wa-float{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    width:60px; height:60px; border-radius:50%;
+    background: var(--sage); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 6px 6px 14px var(--shadow-dark-2), -4px -4px 10px var(--shadow-light);
+  }
+  .wa-float:hover{ transform: scale(1.06); }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .hero-visual{ order:-1; height:260px; }
+    .blob{ width:220px; height:220px; }
+    .contact-grid{ grid-template-columns: 1fr; }
+    nav{ position:fixed; inset: 78px 20px auto 20px; }
+    nav ul{
+      flex-direction:column; background:var(--bg); padding:14px;
+      border-radius:24px; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+      display:none;
+    }
+    nav ul.open{ display:flex; }
+    nav a{ text-align:center; }
+    .menu-toggle{
+      display:flex; align-items:center; justify-content:center;
+      width:42px; height:42px; border-radius:50%; background:var(--bg);
+      box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+      font-size:1.2rem; color:var(--accent-deep); border:none; cursor:pointer;
+    }
+    .nav-links-wrap{ display:flex; align-items:center; gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap navbar">
+    <a href="#top" class="brand">Mouna<span>Beauty</span></a>
+    <div class="nav-links-wrap">
+      <nav>
+        <ul id="navList">
+          <li><a href="#prestations">Prestations</a></li>
+          <li><a href="#tarifs">Tarifs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="nav-cta" href="https://wa.me/221776169493?text=Bonjour%2C%20je%20voudrais%20prendre%20rendez-vous" target="_blank" rel="noopener">RDV WhatsApp</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Salon d'esthétique · Cap Skirring</span>
+        <h1>Le temps s'arrête,<br>votre peau respire.</h1>
+        <p class="lead">Massages, soins du visage et du corps, manucure, pédicure et pose d'ongles — dans un salon pensé pour la détente, à deux pas de Cap Nature.</p>
+        <div class="hero-ctas">
+          <a href="https://wa.me/221776169493?text=Bonjour%2C%20je%20voudrais%20prendre%20rendez-vous" target="_blank" rel="noopener" class="btn btn-primary">Prendre rendez-vous</a>
+          <a href="#tarifs" class="btn btn-ghost">Voir les tarifs</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="blob"></div>
+        <svg class="leaf-icon" viewBox="0 0 200 200" fill="none">
+          <path d="M100 30C60 30 35 65 35 105c0 38 30 65 65 65s65-27 65-65c0-40-25-75-65-75Z" stroke="#8A3F28" stroke-width="3" fill="none" opacity="0.55"/>
+          <path d="M100 45v120M100 75c-18 0-32 14-32 32M100 105c-14 0-24 11-24 24M100 75c18 0 32 14 32 32M100 105c14 0 24 11 24 24" stroke="#78855A" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div class="float-chip clay chip-1">✦ Ambiance zen</div>
+        <div class="float-chip clay chip-2">✦ Produits soignés</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESTATIONS -->
+  <section id="prestations">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="divider clay-inset">💆🏾‍♀️</div>
+        <h2>Nos prestations</h2>
+        <p>Un accompagnement complet, du visage aux pieds.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card clay"><div class="service-icon">🌿</div><h3>Massages</h3><p>Relaxant, aux bougies, dos ou pieds — pour relâcher toutes les tensions.</p></div>
+        <div class="service-card clay"><div class="service-icon">✨</div><h3>Gommage &amp; enveloppement</h3><p>Un corps sublimé, en soin seul ou en forfait complet.</p></div>
+        <div class="service-card clay"><div class="service-icon">👣</div><h3>Beauté des pieds</h3><p>Pédicure classique, avec pose de vernis simple ou semi-permanent.</p></div>
+        <div class="service-card clay"><div class="service-icon">💅</div><h3>Manucure</h3><p>Beauté des mains et pose de vernis, jusqu'au semi-permanent.</p></div>
+        <div class="service-card clay"><div class="service-icon">🎀</div><h3>Pose semi-permanent</h3><p>Une tenue impeccable qui dure, sur les mains comme les pieds.</p></div>
+        <div class="service-card clay"><div class="service-icon">💎</div><h3>Faux ongles</h3><p>Capsule, gel, dip, remplissage ou dépose — sur-mesure.</p></div>
+        <div class="service-card clay"><div class="service-icon">🌸</div><h3>Épilation</h3><p>Un geste soigné, sur demande selon vos besoins.</p></div>
+        <div class="service-card clay"><div class="service-icon">🧖🏾‍♀️</div><h3>Soin du visage</h3><p>Nettoyage de peau, soin anti-âge ou haute hydratation.</p></div>
+        <div class="service-card clay"><div class="service-icon">🤲🏾</div><h3>Soin de dos</h3><p>Un moment de détente ciblé, sur demande.</p></div>
+        <div class="service-card clay"><div class="service-icon">👁️</div><h3>Extension de cils</h3><p>Un regard sublimé, sur demande.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs" class="clay" style="background:var(--bg-soft); border-radius:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="divider clay-inset">₣</div>
+        <h2>Nos tarifs</h2>
+        <p>Tous les prix sont en francs CFA.</p>
+      </div>
+
+      <div class="price-nav">
+        <a href="#pn-massages" class="clay-pill">Massages</a>
+        <a href="#pn-forfaits" class="clay-pill">Forfaits corps</a>
+        <a href="#pn-visage" class="clay-pill">Visage</a>
+        <a href="#pn-pieds" class="clay-pill">Pédicure</a>
+        <a href="#pn-mains" class="clay-pill">Manucure</a>
+        <a href="#pn-ongles" class="clay-pill">Faux ongles</a>
+      </div>
+
+      <div class="price-block" id="pn-massages">
+        <div class="price-block-head"><div class="num clay-inset">1</div><h3>Massages</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Massage relaxant <span class="sub">1h</span></span><span class="dots"></span><span class="amount">15 000 F</span></div>
+          <div class="price-row"><span class="label">Massage avec bougie <span class="sub">1h</span></span><span class="dots"></span><span class="amount">20 000 F</span></div>
+          <div class="price-row"><span class="label">Massage du dos <span class="sub">30 min</span></span><span class="dots"></span><span class="amount">10 000 F</span></div>
+          <div class="price-row"><span class="label">Massage des pieds <span class="sub">20 min</span></span><span class="dots"></span><span class="amount">8 000 F</span></div>
+          <div class="price-row"><span class="label">Gommage corps <span class="sub">30 min</span></span><span class="dots"></span><span class="amount">15 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="price-block" id="pn-forfaits">
+        <div class="price-block-head"><div class="num clay-inset">2</div><h3>Forfaits soin du corps</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Gommage + massage relaxant <span class="sub">1h30</span></span><span class="dots"></span><span class="amount">28 000 F</span></div>
+          <div class="price-row"><span class="label">Gommage + enveloppement + massage <span class="sub">1h30</span></span><span class="dots"></span><span class="amount">40 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="price-block" id="pn-visage">
+        <div class="price-block-head"><div class="num clay-inset">3</div><h3>Soin du visage</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Nettoyage de peau</span><span class="dots"></span><span class="amount">15 000 F</span></div>
+          <div class="price-row"><span class="label">Soin anti-âge <span class="sub">1h</span></span><span class="dots"></span><span class="amount">20 000 F</span></div>
+          <div class="price-row"><span class="label">Soin haute hydratation</span><span class="dots"></span><span class="amount">25 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="price-block" id="pn-pieds">
+        <div class="price-block-head"><div class="num clay-inset">4</div><h3>Beauté des pieds — Pédicure</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Beauté des pieds</span><span class="dots"></span><span class="amount">8 500 F</span></div>
+          <div class="price-row"><span class="label">Beauté des pieds + vernis simple</span><span class="dots"></span><span class="amount">9 000 F</span></div>
+          <div class="price-row"><span class="label">Beauté des pieds + semi-permanent</span><span class="dots"></span><span class="amount">16 000 F</span></div>
+          <div class="price-row"><span class="label">Pose de vernis simple</span><span class="dots"></span><span class="amount">5 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="price-block" id="pn-mains">
+        <div class="price-block-head"><div class="num clay-inset">5</div><h3>Beauté des mains — Manucure</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Beauté des mains</span><span class="dots"></span><span class="amount">7 500 F</span></div>
+          <div class="price-row"><span class="label">Beauté des mains + vernis simple</span><span class="dots"></span><span class="amount">8 000 F</span></div>
+          <div class="price-row"><span class="label">Beauté des mains + semi-permanent</span><span class="dots"></span><span class="amount">15 000 F</span></div>
+          <div class="price-row"><span class="label">Pose de vernis semi-permanent</span><span class="dots"></span><span class="amount">10 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="price-block" id="pn-ongles">
+        <div class="price-block-head"><div class="num clay-inset">6</div><h3>Faux ongles</h3></div>
+        <div class="price-list clay">
+          <div class="price-row"><span class="label">Pose capsule + vernis simple</span><span class="dots"></span><span class="amount">6 000 F</span></div>
+          <div class="price-row"><span class="label">Pose capsule + vernis semi-permanent</span><span class="dots"></span><span class="amount">10 000 F</span></div>
+          <div class="price-row"><span class="label">Pose capsule + gel</span><span class="dots"></span><span class="amount">17 000 F</span></div>
+          <div class="price-row"><span class="label">Dip</span><span class="dots"></span><span class="amount">15 000 F</span></div>
+          <div class="price-row"><span class="label">Remplissage</span><span class="dots"></span><span class="amount">10 000 F</span></div>
+          <div class="price-row"><span class="label">Dépose</span><span class="dots"></span><span class="amount">7 000 F</span></div>
+        </div>
+      </div>
+
+      <div class="note-card clay-inset">🌸 Épilation, soin de dos et extension de cils : tarifs communiqués sur simple demande via WhatsApp.</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="divider clay-inset">📍</div>
+        <h2>Nous trouver</h2>
+        <p>À Cap Skirring, juste après Carrefour en allant vers Cap Nature.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card clay">
+          <h3>Infos pratiques</h3>
+          <div class="info-row">
+            <div class="ic">📍</div>
+            <div class="txt"><strong>Adresse</strong><span>Après Carrefour, vers Cap Nature — Cap Skirring 27005</span></div>
+          </div>
+          <div class="info-row">
+            <div class="ic">🕐</div>
+            <div class="txt"><strong>Horaires</strong><span>Voir les horaires à jour sur notre fiche Google</span></div>
+          </div>
+          <div class="info-row">
+            <div class="ic">📞</div>
+            <div class="txt"><strong>Téléphone / WhatsApp</strong><span>+221 77 616 94 93</span></div>
+          </div>
+          <a class="btn btn-primary" style="margin-top:10px; width:100%; justify-content:center;" href="https://wa.me/221776169493?text=Bonjour%2C%20je%20voudrais%20prendre%20rendez-vous" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+        </div>
+        <div class="map-frame clay">
+          <iframe src="https://www.google.com/maps?q=12.3783056,-16.7200424&z=17&output=embed" loading="lazy" title="Localisation Mouna Beauty"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand">Mouna<span>Beauty</span></a>
+    <p>© <span id="year"></span> Mouna Beauty — Cap Skirring, Sénégal</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/221776169493?text=Bonjour%2C%20je%20voudrais%20prendre%20rendez-vous" target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.4-1.42a9.87 9.87 0 0 0 4.64 1.18h.01c5.46 0 9.9-4.45 9.9-9.9 0-5.46-4.44-9.86-9.9-9.86Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.15 8.15 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.26-8.25 4.55 0 8.25 3.7 8.25 8.25 0 4.55-3.7 8.26-8.25 8.26Zm4.53-6.19c-.25-.13-1.47-.72-1.7-.8-.23-.08-.4-.13-.56.13-.17.25-.65.8-.8.97-.15.17-.3.19-.55.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.16.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.16 1.75 2.67 4.24 3.74.59.26 1.05.4 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const toggle = document.getElementById('menuToggle');
+  const list = document.getElementById('navList');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const open = list.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      list.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }));
+  }
+</script>
+</body>
+</html>
